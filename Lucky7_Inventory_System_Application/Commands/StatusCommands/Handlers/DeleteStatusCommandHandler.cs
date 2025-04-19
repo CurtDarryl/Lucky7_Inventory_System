@@ -32,7 +32,7 @@ public class DeleteStatusCommandHandler : IRequestHandler<DeleteStatusCommand, G
         }
         catch (Exception ex)
         {
-            return new GetResponse(true, null, ex.Message, StatusResponse.unhandled));
+            return new GetResponse(true, null, ex.Message, StatusResponse.unhandled);
         }
     }
 }
