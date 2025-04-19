@@ -7,3 +7,9 @@ public static class StatusResponse
     public const int unhandled = 0;
     public const int invalidoperation = 400;
 }
+
+public static class ConstStatus
+{
+    public const int active = 1;
+    public const int inactive = 2;
+}
