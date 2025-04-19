@@ -2,7 +2,6 @@
 using Lucky7_Inventory_System_Application.Queries.StatusQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Lucky7_Inventory_System_API.Controllers;
 

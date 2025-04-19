@@ -20,7 +20,7 @@ public class GetAllStatusQueryHandler : IRequestHandler<GetAllStatusQuery, GetRe
         try
         {
             var statuses = await _repository.GetAll();
-            if (statuses == null)
+            if (statuses == null || !statuses.Any())
             {
                 return new GetResponse(true, null, "No statuses found", StatusResponse.notfound);
             }
