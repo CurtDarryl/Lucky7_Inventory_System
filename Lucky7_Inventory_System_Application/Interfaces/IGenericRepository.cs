@@ -16,5 +16,6 @@ public interface IGenericRepository<TEntity> where TEntity : class
 
     Task<IEnumerable<TEntity>> GetWhere(Expression<Func<TEntity, bool>> predicate);
 
-    Task<TEntity> GetSingleWhere(Expression<Func<TEntity, bool>> predicate);
+    Task<TEntity?> GetSingleWhere(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[]? includes);
+
 }
