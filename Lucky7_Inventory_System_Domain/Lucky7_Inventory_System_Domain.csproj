@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="UtilityKit">
+      <HintPath>..\..\UtilityKit\UtilityKit\obj\Debug\net9.0\UtilityKit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
