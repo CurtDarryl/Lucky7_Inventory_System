@@ -1,3 +1,4 @@
+using Lucky7_Inventory_System_Application.Commands.UserCommands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,4 +15,17 @@ public class UserController : Controller
         _mediator = mediator;
     }
 
+    [HttpPost("AddUser")]
+    public async Task<IActionResult> AddUser([FromQuery] CreateUserCommand command)
+    {
+        var response = await _mediator.Send(command);
+        return Ok(response);
+    }
+
+    [HttpPut("UpdateUser")]
+    public async Task<IActionResult> UpdateUser([FromQuery]UpdateUserCommand command)
+    {
+        var response = await _mediator.Send(command);
+        return Ok(response);
+    }
 }
