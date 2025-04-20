@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Lucky7_Inventory_System_Domain\Lucky7_Inventory_System_Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="UtilityKit">
+      <HintPath>..\..\UtilityKit\UtilityKit\obj\Debug\net9.0\UtilityKit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

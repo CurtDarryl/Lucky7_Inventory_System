@@ -1,4 +1,5 @@
 ﻿using Lucky7_Inventory_System_Application.Interfaces;
+using Lucky7_Inventory_System_Domain.Entities;
 using Lucky7_Inventory_System_Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -22,7 +23,14 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public async Task<IEnumerable<TEntity>> GetAll()
     {
-        return await _dbSet.ToListAsync();
+        var query = _dbSet.AsQueryable();
+
+        if (typeof(TEntity) == typeof(User))
+        {
+            query = query.Include("Role")
+                         .Include("Status");
+        } 
+        return await query.ToListAsync();
     }
 
     public async Task<TEntity> Add(TEntity entity)
@@ -51,9 +59,21 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return await query.ToListAsync();
     }
 
-    public async Task<TEntity> GetSingleWhere(Expression<Func<TEntity, bool>> predicate)
+    public async Task<TEntity?> GetSingleWhere(
+        Expression<Func<TEntity, bool>> predicate,
+        params Expression<Func<TEntity, object>>[]? includes)
     {
-        var query = _dbSet.Where(predicate);
-        return await query.FirstOrDefaultAsync();
+        IQueryable<TEntity> query = _dbSet;
+
+        if (includes != null)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+        }
+
+        return await query.FirstOrDefaultAsync(predicate);
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using Lucky7_Inventory_System_Application.Constants;
 using Lucky7_Inventory_System_Application.Interfaces;
+using Lucky7_Inventory_System_Application.Services;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
@@ -25,8 +26,8 @@ public class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand, GetRe
                 return new GetResponse(true, null, "Role not found", StatusResponse.notfound);
             }
 
-            role.RoleName = request.Role.RoleName;
-            role.StatusId = request.Role.StatusId ?? role.StatusId;
+            EntityUpdater.UpdateProperty(value => role.RoleName = value, role.RoleName, request.Role.RoleName);
+            EntityUpdater.UpdateProperty(value => role.StatusId = value, role.StatusId, request.Role.StatusId);
 
             var result = await _repository.Update(role);
             return new GetResponse(true, result, "Role was Successfully Updated", StatusResponse.success);
