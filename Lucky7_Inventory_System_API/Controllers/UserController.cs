@@ -31,9 +31,9 @@ public class UserController : Controller
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetUserById(string id)
+    public async Task<IActionResult> GetUserById(string userId)
     {
-        var result = await _mediator.Send(new GetUserByIdQuery { Id = id });
+        var result = await _mediator.Send(new GetUserByIdQuery { UserId = userId });
         return Ok(result);
     }
 

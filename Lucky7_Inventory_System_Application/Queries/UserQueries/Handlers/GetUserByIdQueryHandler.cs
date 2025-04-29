@@ -20,7 +20,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, GetResp
     {
         try
         {
-            Expression<Func<User, bool>> predicate = u => u.Id == request.Id;
+            Expression<Func<User, bool>> predicate = u => u.UserId == request.UserId;
             var user = await _repository.GetSingleWhere(predicate, u => u.Role, u => u.Status);
             if (user == null)
             {

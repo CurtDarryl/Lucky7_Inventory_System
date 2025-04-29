@@ -21,7 +21,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, GetRe
     {
         try
         {
-            Expression<Func<User, bool>> predicate = x => x.Id == request.User.Id;
+            Expression<Func<User, bool>> predicate = x => x.UserId == request.User.UserId;
             var user = await _repository.GetSingleWhere(predicate);
             if (user == null)
             {

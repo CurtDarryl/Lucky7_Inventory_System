@@ -5,5 +5,5 @@ namespace Lucky7_Inventory_System_Application.Queries.UserQueries;
 
 public class GetUserByIdQuery : IRequest<GetResponse>
 {
-    public required string Id { get; set; }
+    public required string UserId { get; set; }
 }

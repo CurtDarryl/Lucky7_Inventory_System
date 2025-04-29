@@ -5,8 +5,8 @@ namespace Lucky7_Inventory_System_Domain.Entities;
 
 public class User
 {
-    [Key]
-    public string Id { get; set; } = IdGenerator.Generate(8);
+    [Key] 
+    public string UserId { get; set; } = IdGenerator.Generate(8);
     public string? Firstname { get; set; }
     public string? Lastname { get; set; }
     public string? Password { get; set; }
