@@ -4,6 +4,7 @@ using Lucky7_Inventory_System_Application.Services;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
 using System.Linq.Expressions;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.UserCommands.Handlers;
@@ -25,7 +26,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, GetRe
             var user = await _repository.GetSingleWhere(predicate);
             if (user == null)
             {
-                return new GetResponse(false, null, "User not found", StatusResponse.notfound);
+                return new GetResponse(false, null, "User not found", HttpStatusCode.NotFound);
             }
 
             EntityUpdater.UpdateProperty(value => user.Firstname = value, user.Firstname, request.User.Firstname);
@@ -35,11 +36,11 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, GetRe
             EntityUpdater.UpdateProperty(value => user.StatusId = value, user.StatusId, request.User.StatusId);
 
             var result = await _repository.Update(user);
-            return new GetResponse(true, result, "User was Successfully Updated", StatusResponse.success);
+            return new GetResponse(true, result, "User was Successfully Updated", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {
-            return new GetResponse(false, null, ex.Message, StatusResponse.unhandled);
+            return new GetResponse(false, null, ex.Message, HttpStatusCode.InternalServerError);
         }
     }
 }

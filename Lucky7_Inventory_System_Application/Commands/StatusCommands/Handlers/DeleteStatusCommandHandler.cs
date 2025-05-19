@@ -2,6 +2,7 @@
 using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.StatusCommands.Handlers;
@@ -23,16 +24,16 @@ public class DeleteStatusCommandHandler : IRequestHandler<DeleteStatusCommand, G
 
             if (status == null)
             {
-                return new GetResponse(true, null, "Status not found", StatusResponse.notfound);
+                return new GetResponse(true, null, "Status not found", HttpStatusCode.NotFound);
             }
 
             await _repository.Delete(status);
 
-            return new GetResponse(true, status, "Status was Successfully Deleted", StatusResponse.success);
+            return new GetResponse(true, status, "Status was Successfully Deleted", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {
-            return new GetResponse(true, null, ex.Message, StatusResponse.unhandled);
+            return new GetResponse(true, null, ex.Message, HttpStatusCode.InternalServerError);
         }
     }
 }

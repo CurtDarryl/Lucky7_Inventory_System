@@ -1,5 +1,6 @@
 ﻿using Lucky7_Inventory_System_Application.Constants;
 using Lucky7_Inventory_System_Domain.Entities;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Services
@@ -11,7 +12,7 @@ namespace Lucky7_Inventory_System_Application.Services
         {
             if (EqualityComparer<T>.Default.Equals(value, default(T)) || (value is int intValue && intValue == 0))
             {
-                return new GetResponse(false, null, $"{fieldName} is Required", StatusResponse.invalidoperation);
+                return new GetResponse(false, null, $"{fieldName} is Required", HttpStatusCode.NotAcceptable);
             }
             return null;
         }

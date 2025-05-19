@@ -3,6 +3,7 @@ using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
 using System.Linq.Expressions;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Queries.UserQueries.Handlers;
@@ -24,14 +25,14 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, GetResp
             var user = await _repository.GetSingleWhere(predicate, u => u.Role, u => u.Status);
             if (user == null)
             {
-                return new GetResponse(true, null, "No User was found", StatusResponse.notfound);
+                return new GetResponse(true, null, "No User was found", HttpStatusCode.NotFound);
             }
 
-            return new GetResponse(true, user, "User was Successfully Retrieved", StatusResponse.success);
+            return new GetResponse(true, user, "User was Successfully Retrieved", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {
-            return new GetResponse(false, null, ex.Message, StatusResponse.unhandled);
+            return new GetResponse(false, null, ex.Message, HttpStatusCode.InternalServerError);
         }
     }
 }

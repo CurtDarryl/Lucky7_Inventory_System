@@ -3,6 +3,7 @@ using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Application.Services;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.UserCommands.Handlers;
@@ -38,11 +39,11 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, GetRe
 
             var result = await _repository.Add(newUser);
 
-            return new GetResponse(true, result, "User created successfully", StatusResponse.success);
+            return new GetResponse(true, result, "User created successfully", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {
-            return new GetResponse(false, null, ex.Message, StatusResponse.unhandled);
+            return new GetResponse(false, null, ex.Message, HttpStatusCode.InternalServerError);
         }
     }
 }

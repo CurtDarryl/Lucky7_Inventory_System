@@ -3,6 +3,7 @@ using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
 using System.Linq.Expressions;
+using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.StatusCommands.Handlers;
@@ -29,16 +30,16 @@ public class CreateStatusCommandHandler : IRequestHandler<CreateStatusCommand, G
             var occured = await _repository.GetSingleWhere(predicate);
             if (occured != null) 
             {
-                return new GetResponse(true, null, "This Status Already Exist", StatusResponse.invalidoperation);
+                return new GetResponse(true, null, "This Status Already Exist", HttpStatusCode.NotAcceptable);
             }
 
             var result = await _repository.Add(status);
 
-            return new GetResponse(true, result, "Status was Successfully Added", StatusResponse.success);
+            return new GetResponse(true, result, "Status was Successfully Added", HttpStatusCode.OK);
         }
         catch (Exception ex) 
         {
-            return new GetResponse(true, null, ex.Message, StatusResponse.unhandled);
+            return new GetResponse(true, null, ex.Message, HttpStatusCode.InternalServerError);
         }
     }
 }
