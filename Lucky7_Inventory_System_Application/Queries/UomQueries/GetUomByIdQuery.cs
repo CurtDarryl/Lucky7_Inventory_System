@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
-namespace Lucky7_Inventory_System_Application.Queries.RoleQueries;
+namespace Lucky7_Inventory_System_Application.Queries.UomQueries;
 
-public class GetCategoryByIdQuery : IRequest<GetResponse>
+public class GetUomByIdQuery : IRequest<GetResponse>
 {
     public int Id { get; set; }
 }

@@ -1,11 +1,10 @@
-﻿using Lucky7_Inventory_System_Application.Constants;
+﻿using System.Net;
 using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
-using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
-namespace Lucky7_Inventory_System_Application.Queries.RoleQueries.Handlers;
+namespace Lucky7_Inventory_System_Application.Queries.CategoryQueries.Handlers;
 
 public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, GetResponse>
 {
@@ -20,12 +19,12 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
     {
         try
         {
-            var roles = await _repository.GetAll();
-            if (roles == null || !roles.Any())
+            var categories = await _repository.GetAll();
+            if (categories == null || !categories.Any())
             {
-                return new GetResponse(true, null, "No Roles were Found", HttpStatusCode.NotFound);
+                return new GetResponse(true, null, "No Categories were Found", HttpStatusCode.NotFound);
             }
-            return new GetResponse(true, roles, "Roles were Successfully Retrieved", HttpStatusCode.OK);
+            return new GetResponse(true, categories, "Categories were Successfully Retrieved", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {

@@ -1,16 +1,15 @@
-﻿using Lucky7_Inventory_System_Application.Constants;
+﻿using System.Net;
 using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
-using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
-namespace Lucky7_Inventory_System_Application.Queries.RoleQueries.Handlers;
+namespace Lucky7_Inventory_System_Application.Queries.UomQueries.Handlers;
 
 public class GetUomByIdQueryHandler : IRequestHandler<GetUomByIdQuery, GetResponse>
 {
     private readonly IGenericRepository<Uom> _repository;
-        
+
     public GetUomByIdQueryHandler(IGenericRepository<Uom> repository)
     {
         _repository = repository;
