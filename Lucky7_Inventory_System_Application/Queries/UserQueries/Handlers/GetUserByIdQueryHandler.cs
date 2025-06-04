@@ -22,6 +22,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, GetResp
         {
             Expression<Func<User, bool>> predicate = u => u.UserId == request.UserId;
             var user = await _repository.GetSingleWhere(predicate, u => u.Role, u => u.Status);
+
             if (user == null)
             {
                 return new GetResponse(true, null, "No User was found", HttpStatusCode.NotFound);

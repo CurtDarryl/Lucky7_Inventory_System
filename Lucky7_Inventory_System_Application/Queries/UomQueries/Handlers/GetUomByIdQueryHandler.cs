@@ -20,6 +20,7 @@ public class GetUomByIdQueryHandler : IRequestHandler<GetUomByIdQuery, GetRespon
         try
         {
             var uom = await _repository.GetById(request.Id);
+
             if (uom == null)
             {
                 return new GetResponse(true, null, "Unit of Measure not found", HttpStatusCode.NotFound);

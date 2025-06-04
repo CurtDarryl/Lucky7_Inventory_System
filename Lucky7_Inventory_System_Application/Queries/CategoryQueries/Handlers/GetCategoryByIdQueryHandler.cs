@@ -20,6 +20,7 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
         try
         {
             var category = await _repository.GetById(request.Id);
+
             if (category == null)
             {
                 return new GetResponse(true, null, "Category not found", HttpStatusCode.NotFound);

@@ -20,6 +20,7 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
         try
         {
             var categories = await _repository.GetAll();
+
             if (categories == null || !categories.Any())
             {
                 return new GetResponse(true, null, "No Categories were Found", HttpStatusCode.NotFound);

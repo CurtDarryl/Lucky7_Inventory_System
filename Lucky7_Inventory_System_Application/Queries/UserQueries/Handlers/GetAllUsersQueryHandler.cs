@@ -20,6 +20,7 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, GetResp
         try
         {
             var users = await _repository.GetAll();
+
             if (!users.Any())
             {
                 return new GetResponse(true, null, "No Users were Found", HttpStatusCode.NotFound);

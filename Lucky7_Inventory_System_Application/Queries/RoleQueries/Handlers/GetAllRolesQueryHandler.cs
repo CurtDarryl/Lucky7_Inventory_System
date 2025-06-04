@@ -20,6 +20,7 @@ public class GetAllRolesQueryHandler : IRequestHandler<GetAllRolesQuery, GetResp
         try
         {
             var roles = await _repository.GetAll();
+
             if (roles == null || !roles.Any())
             {
                 return new GetResponse(true, null, "No Roles were Found", HttpStatusCode.NotFound);

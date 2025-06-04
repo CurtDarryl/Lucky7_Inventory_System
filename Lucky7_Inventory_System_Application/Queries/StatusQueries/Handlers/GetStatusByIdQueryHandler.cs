@@ -20,6 +20,7 @@ public class GetStatusByIdQueryHandler : IRequestHandler<GetStatusByIdQuery, Get
         try
         {
             var status = await _repository.GetById(request.Id);
+
             if (status == null)
             {
                 return new GetResponse(true, null, "Status not found", HttpStatusCode.NotFound);

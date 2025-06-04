@@ -20,6 +20,7 @@ public class GetAllUomQueryHandler : IRequestHandler<GetAllUomQuery, GetResponse
         try
         {
             var uoms = await _repository.GetAll();
+
             if (uoms == null || !uoms.Any())
             {
                 return new GetResponse(true, null, "No Unit Of Measures were Found", HttpStatusCode.NotFound);

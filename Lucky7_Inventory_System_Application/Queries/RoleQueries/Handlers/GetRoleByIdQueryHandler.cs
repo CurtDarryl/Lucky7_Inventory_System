@@ -20,6 +20,7 @@ public class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, GetResp
         try
         {
             var role = await _repository.GetById(request.Id);
+
             if (role == null)
             {
                 return new GetResponse(true, null, "Role not found", HttpStatusCode.NotFound);
