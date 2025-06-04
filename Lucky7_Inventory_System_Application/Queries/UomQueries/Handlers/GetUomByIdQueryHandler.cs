@@ -19,13 +19,13 @@ public class GetUomByIdQueryHandler : IRequestHandler<GetUomByIdQuery, GetRespon
     {
         try
         {
-            var role = await _repository.GetById(request.Id);
-            if (role == null)
+            var uom = await _repository.GetById(request.Id);
+            if (uom == null)
             {
-                return new GetResponse(true, null, "Role not found", HttpStatusCode.NotFound);
+                return new GetResponse(true, null, "Unit of Measure not found", HttpStatusCode.NotFound);
             }
 
-            return new GetResponse(true, role, "Successfully Rerieved Role", HttpStatusCode.OK);
+            return new GetResponse(true, uom, "Successfully Rerieved Unit of Measure", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {

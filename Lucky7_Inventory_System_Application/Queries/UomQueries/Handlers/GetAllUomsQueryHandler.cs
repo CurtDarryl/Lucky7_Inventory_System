@@ -19,12 +19,12 @@ public class GetAllUomQueryHandler : IRequestHandler<GetAllUomQuery, GetResponse
     {
         try
         {
-            var roles = await _repository.GetAll();
-            if (roles == null || !roles.Any())
+            var uoms = await _repository.GetAll();
+            if (uoms == null || !uoms.Any())
             {
-                return new GetResponse(true, null, "No Roles were Found", HttpStatusCode.NotFound);
+                return new GetResponse(true, null, "No Unit Of Measures were Found", HttpStatusCode.NotFound);
             }
-            return new GetResponse(true, roles, "Roles were Successfully Retrieved", HttpStatusCode.OK);
+            return new GetResponse(true, uoms, "Unit Of Measures were Successfully Retrieved", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {
