@@ -16,7 +16,7 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
         _repository = repository;
     }
 
-    public async Task<GetResponse> Handle(GetCategory request, CancellationToken cancellationToken)
+    public async Task<GetResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
     {
         try
         {
