@@ -4,9 +4,9 @@ using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
-namespace Lucky7_Inventory_System_Application.Queries.RefTypeQueries.Handlers;
+namespace Lucky7_Inventory_System_Application.Queries.RefCodeQueries.Handlers;
 
-public class GetAllRefCodeQueryHanlder : IRequestHandler<GetAllRefTypeQuery, GetResponse>
+public class GetAllRefCodeQueryHanlder : IRequestHandler<GetAllRefCodeQuery, GetResponse>
 {
     private readonly IGenericRepository<RefCode> _repository;
 
@@ -15,11 +15,11 @@ public class GetAllRefCodeQueryHanlder : IRequestHandler<GetAllRefTypeQuery, Get
         _repository = repository;
     }
 
-    public async Task<GetResponse> Handle(GetAllRefTypeQuery request, CancellationToken cancellationToken)
+    public async Task<GetResponse> Handle(GetAllRefCodeQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            var refCodes= await _repository.GetAll();
+            var refCodes = await _repository.GetAll();
 
             if (refCodes == null || !refCodes.Any())
             {
