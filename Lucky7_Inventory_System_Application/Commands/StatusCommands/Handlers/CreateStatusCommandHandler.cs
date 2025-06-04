@@ -1,9 +1,8 @@
-﻿using Lucky7_Inventory_System_Application.Constants;
+﻿using System.Linq.Expressions;
+using System.Net;
 using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
-using System.Linq.Expressions;
-using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.StatusCommands.Handlers;
@@ -28,7 +27,7 @@ public class CreateStatusCommandHandler : IRequestHandler<CreateStatusCommand, G
 
             Expression<Func<Status, bool>> predicate = u => u.StatusName == request.StatusName;
             var occured = await _repository.GetSingleWhere(predicate);
-            if (occured != null) 
+            if (occured != null)
             {
                 return new GetResponse(true, null, "This Status Already Exist", HttpStatusCode.NotAcceptable);
             }
@@ -37,7 +36,7 @@ public class CreateStatusCommandHandler : IRequestHandler<CreateStatusCommand, G
 
             return new GetResponse(true, result, "Status was Successfully Added", HttpStatusCode.OK);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             return new GetResponse(true, null, ex.Message, HttpStatusCode.InternalServerError);
         }
