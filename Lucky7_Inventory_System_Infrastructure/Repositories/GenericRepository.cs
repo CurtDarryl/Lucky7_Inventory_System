@@ -76,4 +76,8 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return await query.FirstOrDefaultAsync(predicate);
     }
 
+    public async Task<bool> Exists(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbSet.AnyAsync(predicate);
+    }
 }

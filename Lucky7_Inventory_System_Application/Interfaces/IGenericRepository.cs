@@ -1,8 +1,9 @@
 ﻿using System.Linq.Expressions;
+using Lucky7_Inventory_System_Domain.Entities;
 
 namespace Lucky7_Inventory_System_Application.Interfaces;
 
-public interface IGenericRepository<TEntity> where TEntity : class 
+public interface IGenericRepository<TEntity> where TEntity : class
 {
     Task<TEntity> GetById(int id);
 
@@ -18,4 +19,5 @@ public interface IGenericRepository<TEntity> where TEntity : class
 
     Task<TEntity?> GetSingleWhere(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[]? includes);
 
+    Task<bool> Exists(Expression<Func<TEntity, bool>> predicate);
 }
