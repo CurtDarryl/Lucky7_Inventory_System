@@ -1,7 +1,7 @@
-﻿using Lucky7_Inventory_System_Application.Interfaces;
+﻿using System.Net;
+using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
-using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.CategoryCommands.Handlers;
@@ -19,6 +19,9 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
     {
         try
         {
+            if (request.Category == null)
+                return new GetResponse(false, null, "Invalid request: Category is required", HttpStatusCode.BadRequest);
+
             var category = await _repository.GetById(request.Category.CategoryId);
 
             if (category == null)

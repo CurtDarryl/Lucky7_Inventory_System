@@ -1,8 +1,7 @@
-﻿using Lucky7_Inventory_System_Application.Constants;
+﻿using System.Net;
 using Lucky7_Inventory_System_Application.Interfaces;
 using Lucky7_Inventory_System_Domain.Entities;
 using MediatR;
-using System.Net;
 using static Lucky7_Inventory_System_Application.Responses.ServiceResponses;
 
 namespace Lucky7_Inventory_System_Application.Commands.CategoryCommands.Handlers;
@@ -20,8 +19,14 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
     {
         try
         {
-            if (request.CategoryName == null)
-                return new GetResponse(true, null, "This Role Already Exist", HttpStatusCode.BadRequest);
+            if (string.IsNullOrWhiteSpace(request.CategoryName))
+                return new GetResponse(false, null, "Category name is required", HttpStatusCode.BadRequest);
+
+            bool isCategoryExist = await _repository.Exists(c => c.CategoryName != null
+                                            && c.CategoryName.Equals(request.CategoryName, StringComparison.CurrentCultureIgnoreCase));
+
+            if (isCategoryExist)
+                return new GetResponse(true, null, "This Category Already Exist", HttpStatusCode.BadRequest);
 
             var category = new Category
             {
